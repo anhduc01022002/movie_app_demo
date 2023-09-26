@@ -21,6 +21,7 @@ import 'package:movie_app/domain/usecases/get_movie_detail.dart';
 import 'package:movie_app/domain/usecases/get_playing_now.dart';
 import 'package:movie_app/domain/usecases/get_popular.dart';
 import 'package:movie_app/domain/usecases/get_preferred_language.dart';
+import 'package:movie_app/domain/usecases/get_preferred_theme.dart';
 import 'package:movie_app/domain/usecases/get_trending.dart';
 import 'package:movie_app/domain/usecases/get_videos.dart';
 import 'package:movie_app/domain/usecases/login_user.dart';
@@ -28,16 +29,19 @@ import 'package:movie_app/domain/usecases/logout_user.dart';
 import 'package:movie_app/domain/usecases/save_movie.dart';
 import 'package:movie_app/domain/usecases/search_movies.dart';
 import 'package:movie_app/domain/usecases/update_language.dart';
-import 'package:movie_app/presentation/blocs/cast/cast_bloc.dart';
-import 'package:movie_app/presentation/blocs/favorite/favorite_bloc.dart';
-import 'package:movie_app/presentation/blocs/language_bloc/language_bloc.dart';
-import 'package:movie_app/presentation/blocs/login/login_bloc.dart';
-import 'package:movie_app/presentation/blocs/movie/movie_bloc.dart';
-import 'package:movie_app/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
-import 'package:movie_app/presentation/blocs/movie_detail/movie_detail_bloc.dart';
-import 'package:movie_app/presentation/blocs/movie_tab/movie_tab_bloc.dart';
-import 'package:movie_app/presentation/blocs/search_movie/search_movie_bloc.dart';
-import 'package:movie_app/presentation/blocs/videos/videos_bloc.dart';
+import 'package:movie_app/domain/usecases/update_theme.dart';
+import 'package:movie_app/presentation/blocs/cast/cast_cubit.dart';
+import 'package:movie_app/presentation/blocs/favorite/favorite_cubit.dart';
+import 'package:movie_app/presentation/blocs/language_bloc/language_cubit.dart';
+import 'package:movie_app/presentation/blocs/loading/loading_cubit.dart';
+import 'package:movie_app/presentation/blocs/login/login_cubit.dart';
+import 'package:movie_app/presentation/blocs/movie/movie_cubit.dart';
+import 'package:movie_app/presentation/blocs/movie_backdrop/movie_backdrop_cubit.dart';
+import 'package:movie_app/presentation/blocs/movie_detail/movie_detail_cubit.dart';
+import 'package:movie_app/presentation/blocs/movie_tab/movie_tab_cubit.dart';
+import 'package:movie_app/presentation/blocs/search_movie/search_movie_cubit.dart';
+import 'package:movie_app/presentation/blocs/theme/theme_cubit.dart';
+import 'package:movie_app/presentation/blocs/videos/videos_cubit.dart';
 
 final getItInstance = GetIt.I;
 
@@ -115,52 +119,69 @@ Future init() async {
       () => GetPreferredLanguage(getItInstance()));
 
   getItInstance
+      .registerLazySingleton<UpdateTheme>(() => UpdateTheme(getItInstance()));
+
+  getItInstance.registerLazySingleton<GetPreferredTheme>(
+          () => GetPreferredTheme(getItInstance()));
+
+  getItInstance
       .registerLazySingleton<LoginUser>(() => LoginUser(getItInstance()));
 
   getItInstance
       .registerLazySingleton<LogoutUser>(() => LogoutUser(getItInstance()));
 
-  getItInstance.registerFactory(() => MovieBackdropBloc());
+  getItInstance.registerFactory(() => MovieBackdropCubit());
 
-  getItInstance.registerFactory(() => MovieBloc(
+  getItInstance.registerFactory(() => MovieCubit(
+        loadingCubit: getItInstance(),
         getTrending: getItInstance(),
-        movieBackdropBloc: getItInstance(),
+        movieBackdropCubit: getItInstance(),
       ));
-  getItInstance.registerFactory(() => MovieTabBloc(
+  getItInstance.registerFactory(() => MovieTabCubit(
         getPopular: getItInstance(),
         getComingSoon: getItInstance(),
         getPlayingNow: getItInstance(),
       ));
-  getItInstance.registerFactory(() => MovieDetailBloc(
+  getItInstance.registerFactory(() => MovieDetailCubit(
+        loadingCubit: getItInstance(),
         getMovieDetail: getItInstance(),
         castBloc: getItInstance(),
-        videosBloc: getItInstance(),
-        favoriteBloc: getItInstance(),
+        videosCubit: getItInstance(),
+        favoriteCubit: getItInstance(),
       ));
-  getItInstance.registerFactory(() => CastBloc(
+  getItInstance.registerFactory(() => CastCubit(
         getCast: getItInstance(),
       ));
-  getItInstance.registerFactory(() => VideosBloc(
+  getItInstance.registerFactory(() => VideosCubit(
         getVideos: getItInstance(),
       ));
-  getItInstance.registerFactory(() => SearchMovieBloc(
+  getItInstance.registerFactory(() => SearchMovieCubit(
+        loadingCubit: getItInstance(),
         searchMovies: getItInstance(),
       ));
 
-  getItInstance.registerSingleton<LanguageBloc>(LanguageBloc(
+  getItInstance.registerSingleton<LanguageCubit>(LanguageCubit(
     getPreferredLanguage: getItInstance(),
     updateLanguage: getItInstance(),
   ));
 
-  getItInstance.registerFactory(() => FavoriteBloc(
+  getItInstance.registerFactory(() => FavoriteCubit(
         saveMovie: getItInstance(),
         checkIfMovieFavorite: getItInstance(),
         deleteFavoriteMovie: getItInstance(),
         getFavoriteMovies: getItInstance(),
       ));
 
-  getItInstance.registerFactory(() => LoginBloc(
+  getItInstance.registerFactory(() => LoginCubit(
+        loadingCubit: getItInstance(),
         loginUser: getItInstance(),
         logoutUser: getItInstance(),
       ));
+  
+  getItInstance.registerSingleton<LoadingCubit>(LoadingCubit());
+
+  getItInstance.registerSingleton<ThemeCubit>(ThemeCubit(
+    getPreferredTheme: getItInstance(),
+    updateTheme: getItInstance(),
+  ));
 }

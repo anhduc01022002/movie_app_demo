@@ -24,6 +24,7 @@
   "wrongUsernamePassword": "Tên đăng nhập hoặc Mật khẩu không đúng",
   "noNetwork": "Không kết nối với mạng",
   "sessionDenied": "Phiên đăng nhập bị từ chối",
-  "enterTMDbUsername": "Enter TMDb username here...",
-  "enterPassword": "Enter password here..."
+  "enterTMDbUsername": "Tài khoản",
+  "enterPassword": "mật khẩu",
+  "guestSignIn": "Đăng nhập tài khoản ảo"
 }

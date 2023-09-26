@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:bloc/bloc.dart';
@@ -10,25 +9,23 @@ import 'package:movie_app/domain/usecases/get_coming_soon.dart';
 import 'package:movie_app/domain/usecases/get_playing_now.dart';
 import 'package:movie_app/domain/usecases/get_popular.dart';
 
-part 'movie_tab_event.dart';
 part 'movie_tab_state.dart';
 
-class MovieTabBloc extends Bloc<MovieTabEvent, MovieTabState> {
+class MovieTabCubit extends Cubit<MovieTabState> {
   final GetPopular getPopular;
   final GetPlayingNow getPlayingNow;
   final GetComingSoon getComingSoon;
 
-  MovieTabBloc({
+  MovieTabCubit({
     required this.getComingSoon,
     required this.getPlayingNow,
     required this.getPopular,
-  }) : super(const MovieTabInitial()) {
-    on<MovieTabChangedEvent>(_onMovieTabChangedEvent);
-  }
+  }) : super(const MovieTabInitial());
 
-  FutureOr<void> _onMovieTabChangedEvent(MovieTabChangedEvent event, Emitter<MovieTabState> emit) async {
-    Either<AppError, List<MovieEntity>> moviesEither;
-    switch (event.currentTabIndex) {
+  void movieTabChanged({int currentTabIndex = 0}) async {
+    emit(MovieTabLoading(currentTabIndex: currentTabIndex));
+    Either<AppError, List<MovieEntity>>? moviesEither;
+    switch (currentTabIndex) {
       case 0:
         moviesEither = await getPopular(NoParams());
         break;
@@ -38,27 +35,24 @@ class MovieTabBloc extends Bloc<MovieTabEvent, MovieTabState> {
       case 2:
         moviesEither = await getComingSoon(NoParams());
         break;
-      default:
-        moviesEither = await getPopular(NoParams());
-        break;
     }
-    moviesEither.fold(
-          (l) {
-        emit(MovieTabLoadError(
-          currentTabIndex: event.currentTabIndex,
+    if (moviesEither != null){
+      emit(moviesEither.fold(
+            (l) => MovieTabLoadError(
+          currentTabIndex: currentTabIndex,
           errorType: l.appErrorType,
-        ));
-      },
-          (movies) {
-        emit(MovieTabChanged(
-          currentTabIndex: event.currentTabIndex,
-          movies: movies,
-        ));
-      },
-    );
+        ),
+            (movies) {
+              return MovieTabChanged(
+                currentTabIndex: currentTabIndex,
+                movies: movies,
+          );
+        },
+      ));
+    }
+  }
     // emit(MovieTabLoadError(
     //   currentTabIndex: event.currentTabIndex,
     //   errorType: AppErrorType.network,
     // ));
-  }
 }

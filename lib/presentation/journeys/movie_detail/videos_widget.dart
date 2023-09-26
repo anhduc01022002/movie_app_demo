@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/common/constants/route_constants.dart';
 import 'package:movie_app/common/extensions/string_extensions.dart';
-import 'package:movie_app/presentation/blocs/videos/videos_bloc.dart';
+import 'package:movie_app/presentation/blocs/videos/videos_cubit.dart';
 import 'package:movie_app/presentation/journeys/watch_video/watch_video_arguments.dart';
 import 'package:movie_app/presentation/journeys/watch_video/watch_video_screen.dart';
-import 'package:movie_app/presentation/translation_constants.dart';
+import 'package:movie_app/common/constants/translation_constants.dart';
 import 'package:movie_app/presentation/widgets/button.dart';
 
 class VideosWidget extends StatelessWidget {
-  final VideosBloc videosBloc;
+  final VideosCubit videosBloc;
 
   const VideosWidget({
     super.key,

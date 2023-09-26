@@ -6,7 +6,7 @@ import 'package:movie_app/presentation/themes/theme_color.dart';
 
 class Button extends StatelessWidget {
   final String text;
-  final onPressed;
+  final VoidCallback? onPressed;
   final bool isEnabled;
 
   const Button({
@@ -18,26 +18,55 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeIn,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-            colors: [
-              AppColor.royalBlue,
-              AppColor.violet,
-            ],
+        gradient: LinearGradient(
+          colors: isEnabled
+              ? [AppColor.royalBlue, AppColor.violet]
+              : [Colors.grey, Colors.grey],
         ),
-        borderRadius: BorderRadius.all(Radius.circular(Sizes.dimen_20.w),
+        borderRadius: BorderRadius.all(
+          Radius.circular(Sizes.dimen_20.w),
         ),
       ),
       padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_16.w),
-      margin: EdgeInsets.symmetric(vertical: Sizes.dimen_12.h),
+      margin: EdgeInsets.symmetric(vertical: Sizes.dimen_10.h),
+      height: Sizes.dimen_32.h,
       child: TextButton(
-          onPressed: onPressed,
-          child: Text(
-            text.t(context),
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
+        key: const ValueKey('main_button'),
+        onPressed: isEnabled ? onPressed : null,
+        child: Text(
+          text.t(context),
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
       ),
     );
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       gradient: const LinearGradient(
+  //           colors: [
+  //             AppColor.royalBlue,
+  //             AppColor.violet,
+  //           ],
+  //       ),
+  //       borderRadius: BorderRadius.all(Radius.circular(Sizes.dimen_20.w),
+  //       ),
+  //     ),
+  //     padding: EdgeInsets.symmetric(horizontal: Sizes.dimen_16.w),
+  //     margin: EdgeInsets.symmetric(vertical: Sizes.dimen_12.h),
+  //     child: TextButton(
+  //         onPressed: onPressed,
+  //         child: Text(
+  //           text.t(context),
+  //           style: Theme.of(context).textTheme.bodyMedium,
+  //         ),
+  //     ),
+  //   );
+  // }
 }

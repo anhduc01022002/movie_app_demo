@@ -3,7 +3,7 @@ import 'package:movie_app/common/constants/size_constants.dart' as Sizes;
 import 'package:movie_app/common/extensions/size_extensions.dart';
 import 'package:movie_app/common/extensions/string_extensions.dart';
 import 'package:movie_app/presentation/themes/theme_color.dart';
-import 'package:movie_app/presentation/translation_constants.dart';
+import 'package:movie_app/common/constants/translation_constants.dart';
 import 'package:movie_app/presentation/widgets/button.dart';
 
 class AppDialog extends StatelessWidget {

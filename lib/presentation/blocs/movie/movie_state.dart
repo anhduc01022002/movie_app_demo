@@ -1,4 +1,4 @@
-part of 'movie_bloc.dart';
+part of 'movie_cubit.dart';
 
 abstract class MovieState extends Equatable{
   const MovieState();

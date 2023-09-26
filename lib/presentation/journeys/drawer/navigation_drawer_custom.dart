@@ -5,18 +5,19 @@ import 'package:movie_app/common/constants/route_constants.dart';
 import 'package:movie_app/common/constants/size_constants.dart' as Sizes;
 import 'package:movie_app/common/extensions/size_extensions.dart';
 import 'package:movie_app/common/extensions/string_extensions.dart';
-import 'package:movie_app/presentation/blocs/language_bloc/language_bloc.dart';
-import 'package:movie_app/presentation/blocs/login/login_bloc.dart';
+import 'package:movie_app/presentation/blocs/language_bloc/language_cubit.dart';
+import 'package:movie_app/presentation/blocs/login/login_cubit.dart';
+import 'package:movie_app/presentation/blocs/theme/theme_cubit.dart';
 import 'package:movie_app/presentation/journeys/drawer/navigation_expanded_list.dart';
 import 'package:movie_app/presentation/journeys/drawer/navigation_list_item.dart';
-import 'package:movie_app/presentation/journeys/favorite/favorite_screen.dart';
-import 'package:movie_app/presentation/translation_constants.dart';
+import 'package:movie_app/presentation/themes/theme_color.dart';
+import 'package:movie_app/common/constants/translation_constants.dart';
 import 'package:movie_app/presentation/widgets/app_dialog.dart';
 import 'package:movie_app/presentation/widgets/logo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({Key? key}) : super(key: key);
+class NavigationDrawerCustom extends StatelessWidget {
+  const NavigationDrawerCustom({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +58,8 @@ class NavigationDrawer extends StatelessWidget {
                 onPressed: (index) {
                   final language = Languages.languages[index];
                   print('Selected language: ${language.code}');
-                  BlocProvider.of<LanguageBloc>(context)
-                      .add(ToggleLanguageEvent(language));
+                  BlocProvider.of<LanguageCubit>(context)
+                      .toggleLanguage(language);
                 }),
             NavigationListItem(
               title: TranslationConstants.feedback.t(context),
@@ -80,7 +81,7 @@ class NavigationDrawer extends StatelessWidget {
                 _showDialog(context);
               },
             ),
-            BlocListener<LoginBloc, LoginState>(
+            BlocListener<LoginCubit, LoginState>(
               listenWhen: (previous, current) => current is LogoutSuccess,
               listener: (context, state) {
                 Navigator.of(context).pushNamedAndRemoveUntil(
@@ -89,10 +90,28 @@ class NavigationDrawer extends StatelessWidget {
               child: NavigationListItem(
                 title: TranslationConstants.logout.t(context),
                 onPressed: () {
-                  BlocProvider.of<LoginBloc>(context).add(LogoutEvent());
+                  BlocProvider.of<LoginCubit>(context).logout();
                 },
               ),
             ),
+            const Spacer(),
+            BlocBuilder<ThemeCubit, Themes>(builder: (context, theme) {
+              return Align(
+                alignment: Alignment.center,
+                child: IconButton(
+                  onPressed: () => context.read<ThemeCubit>().toggleTheme(),
+                  icon: Icon(
+                    theme == Themes.dark
+                        ? Icons.brightness_4_sharp
+                        : Icons.brightness_7_sharp,
+                    color: context.read<ThemeCubit>().state == Themes.dark
+                        ? Colors.white
+                        : AppColor.vulcan,
+                    size: Sizes.Sizes.dimen_40.w,
+                  ),
+                ),
+              );
+            }),
           ],
         ),
       ),

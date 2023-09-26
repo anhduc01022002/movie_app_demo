@@ -5,7 +5,7 @@ import 'package:movie_app/common/extensions/size_extensions.dart';
 import 'package:movie_app/common/extensions/string_extensions.dart';
 import 'package:movie_app/domain/entities/video_entity.dart';
 import 'package:movie_app/presentation/journeys/watch_video/watch_video_arguments.dart';
-import 'package:movie_app/presentation/translation_constants.dart';
+import 'package:movie_app/common/constants/translation_constants.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class WatchVideoScreen extends StatefulWidget {
@@ -49,7 +49,9 @@ class _WatchVideoScreenState extends State<WatchVideoScreen> {
       appBar: AppBar(
         title: Text(
           TranslationConstants.watchTrailers.t(context),
+          style: const TextStyle(color: Colors.white),
         ),
+        backgroundColor: Colors.black,
       ),
       body: YoutubePlayerBuilder(
         player: YoutubePlayer(

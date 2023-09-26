@@ -23,7 +23,7 @@ class MovieWidget extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         const MovieBackdropWidget(),
-        SingleChildScrollView(  // wrap your Column in a SingleChildScrollView
+        SingleChildScrollView(
           child: Column(
             children: [
               const MovieAppBar(),

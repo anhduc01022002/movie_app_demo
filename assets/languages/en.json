@@ -24,6 +24,7 @@
   "wrongUsernamePassword": "Username or email id is invalid",
   "noNetwork": "No network connection",
   "sessionDenied": "Session denied",
-  "enterTMDbUsername": "Enter TMDb username here...",
-  "enterPassword": "Enter password here..."
+  "enterTMDbUsername": "Enter username",
+  "enterPassword": "Enter password",
+  "guestSignIn": "Guest Sign In"
 }

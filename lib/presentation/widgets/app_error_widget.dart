@@ -4,14 +4,14 @@ import 'package:movie_app/common/constants/size_constants.dart' as Sizes;
 import 'package:movie_app/common/extensions/size_extensions.dart';
 import 'package:movie_app/common/extensions/string_extensions.dart';
 import 'package:movie_app/domain/entities/app_error.dart';
-import 'package:movie_app/presentation/blocs/movie/movie_bloc.dart';
-import 'package:movie_app/presentation/translation_constants.dart';
+import 'package:movie_app/presentation/blocs/movie/movie_cubit.dart';
+import 'package:movie_app/common/constants/translation_constants.dart';
 import 'package:movie_app/presentation/widgets/button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppErrorWidget extends StatefulWidget {
   final AppErrorType errorType;
-  final Function onPressed;
+  final Function() onPressed;
 
   const AppErrorWidget(
       {super.key, required this.errorType, required this.onPressed});

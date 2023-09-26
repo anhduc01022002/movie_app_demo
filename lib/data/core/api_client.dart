@@ -17,7 +17,7 @@ class ApiClient{
       },
     );
 
-    print(response.body);
+    await Future.delayed(const Duration(milliseconds: 500));
     if(response.statusCode >= 200 && response.statusCode < 300){
       return json.decode(response.body);
     }else{

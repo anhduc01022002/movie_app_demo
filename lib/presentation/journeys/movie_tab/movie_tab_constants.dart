@@ -1,4 +1,4 @@
-import 'package:movie_app/presentation/translation_constants.dart';
+import 'package:movie_app/common/constants/translation_constants.dart';
 
 class Tab {
   final String title;

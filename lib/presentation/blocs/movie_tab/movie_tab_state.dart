@@ -1,4 +1,4 @@
-part of 'movie_tab_bloc.dart';
+part of 'movie_tab_cubit.dart';
 
 abstract class MovieTabState extends Equatable {
   final int currentTabIndex;
@@ -32,4 +32,8 @@ class MovieTabLoadError extends MovieTabState {
     required this.errorType,
     required int currentTabIndex,
   }) : super(currentTabIndex: currentTabIndex);
+}
+
+class MovieTabLoading extends MovieTabState {
+  const MovieTabLoading({required int currentTabIndex}) : super(currentTabIndex: currentTabIndex);
 }

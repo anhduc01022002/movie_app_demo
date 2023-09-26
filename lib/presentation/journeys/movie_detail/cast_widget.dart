@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/common/constants/size_constants.dart' as Sizes;
 import 'package:movie_app/common/extensions/size_extensions.dart';
 import 'package:movie_app/data/core/api_constants.dart';
-import 'package:movie_app/presentation/blocs/cast/cast_bloc.dart';
+import 'package:movie_app/presentation/blocs/cast/cast_cubit.dart';
+import 'package:movie_app/presentation/blocs/theme/theme_cubit.dart';
 import 'package:movie_app/presentation/themes/theme_text.dart';
 
 class CastWidget extends StatelessWidget {
@@ -12,7 +13,7 @@ class CastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CastBloc, CastState>(
+    return BlocBuilder<CastCubit, CastState>(
       builder: (context, state) {
         if (state is CastLoaded) {
           return Container(
@@ -62,7 +63,10 @@ class CastWidget extends StatelessWidget {
                             castEntity.name,
                             overflow: TextOverflow.fade,
                             maxLines: 1,
-                            style: Theme.of(context).textTheme.vulcanBodyText2,
+                            style: context.read<ThemeCubit>().state ==
+                                Themes.dark
+                                ? Theme.of(context).textTheme.vulcanBodyText2
+                                : Theme.of(context).textTheme.whiteBodyText2,
                           ),
                         ),
                         Padding(
