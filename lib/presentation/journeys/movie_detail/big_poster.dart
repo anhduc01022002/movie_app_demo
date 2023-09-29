@@ -18,9 +18,13 @@ class BigPoster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         Container(
+          height: screenHeight,
+          width: screenWidth,
           foregroundDecoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -33,7 +37,9 @@ class BigPoster extends StatelessWidget {
           ),
           child: CachedNetworkImage(
             imageUrl: '${ApiConstants.BASE_IMAGE_URL}${movie.posterPath}',
-            width: ScreenUtil().screenWidth,
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
           ),
         ),
         Positioned(

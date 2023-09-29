@@ -89,6 +89,7 @@ flutter:
   assets:
     - assets/pngs/logo.png
     - assets/pngs/tmdb_logo.png
+    - assets/jpgs/poster_login.jpg
     - assets/languages/
     - assets/animations/loading_circle.flr
 

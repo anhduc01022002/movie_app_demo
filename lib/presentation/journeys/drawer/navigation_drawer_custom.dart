@@ -96,18 +96,23 @@ class NavigationDrawerCustom extends StatelessWidget {
             ),
             const Spacer(),
             BlocBuilder<ThemeCubit, Themes>(builder: (context, theme) {
+              final screenHeight = MediaQuery.of(context).size.height;
+              final screenWidth = MediaQuery.of(context).size.width;
+              final iconSize = screenWidth * 0.1;
+              final containerSize = iconSize * 1.2;
+
               return Align(
                 alignment: Alignment.center,
-                child: IconButton(
-                  onPressed: () => context.read<ThemeCubit>().toggleTheme(),
-                  icon: Icon(
-                    theme == Themes.dark
-                        ? Icons.brightness_4_sharp
-                        : Icons.brightness_7_sharp,
-                    color: context.read<ThemeCubit>().state == Themes.dark
-                        ? Colors.white
-                        : AppColor.vulcan,
-                    size: Sizes.Sizes.dimen_40.w,
+                child: SizedBox(
+                  height: containerSize,
+                  width: containerSize,
+                  child: IconButton(
+                    onPressed: () => context.read<ThemeCubit>().toggleTheme(),
+                    icon: Icon(
+                      theme == Themes.dark ? Icons.brightness_4_sharp : Icons.brightness_7_sharp,
+                      color: context.read<ThemeCubit>().state == Themes.dark ? Colors.white : AppColor.vulcan,
+                      size: iconSize,
+                    ),
                   ),
                 ),
               );
