@@ -16,14 +16,17 @@ A few resources to get you started if this is your first Flutter project:
 
 ## Screenshots
 
--  Screenshot for IOS
+### Screenshot for IOS
 
-![Screenshot 1](/screenshots/screenshot2.png)
-![Screenshot 2](/screenshots/screenshot3.png)
-![Screenshot 3](/screenshots/screenshot4.png)
-![Screenshot 4](/screenshots/screenshot5.png)
-![Screenshot 5](/screenshots/screenshot6.png)
-![Screenshot 6](/screenshots/screenshot7.png)
+<p float="left">
+  <img src="/screenshots/screenshot2.png" width="200" />
+  <img src="/screenshots/screenshot3.png" width="200" />
+  <img src="/screenshots/screenshot4.png" width="200" />
+  <img src="/screenshots/screenshot5.png" width="200" />
+  <img src="/screenshots/screenshot6.png" width="200" />
+  <img src="/screenshots/screenshot7.png" width="200" />
+
+</p>
 
 ## Set up
 
@@ -36,17 +39,17 @@ A few resources to get you started if this is your first Flutter project:
 
 # Dependency
 
--[http](https://pub.dev/packages/http)
--[cupertino_icons](https://pub.dev/packages/cupertino_icons)
--[url_launcher](https://pub.dev/packages/url_launcher)
--[connectivity_plus](https://pub.dev/packages/connectivity_plus)
--[equatable](https://pub.dev/packages/equatable)
--[flutter_screenutil](https://pub.dev/packages/flutter_screenutil)
--[flutter_bloc](https://pub.dev/packages/flutter_bloc)
--[cached_network_image](https://pub.dev/packages/cached_network_image)
--[youtube_player_flutter](https://pub.dev/packages/youtube_player_flutter)
--[hive](https://pub.dev/packages/hive)
--[flare_flutter](https://pub.dev/packages/flare_flutter)
+- [http](https://pub.dev/packages/http)
+- [cupertino_icons](https://pub.dev/packages/cupertino_icons)
+- [url_launcher](https://pub.dev/packages/url_launcher)
+- [connectivity_plus](https://pub.dev/packages/connectivity_plus)
+- [equatable](https://pub.dev/packages/equatable)
+- [flutter_screenutil](https://pub.dev/packages/flutter_screenutil)
+- [flutter_bloc](https://pub.dev/packages/flutter_bloc)
+- [cached_network_image](https://pub.dev/packages/cached_network_image)
+- [youtube_player_flutter](https://pub.dev/packages/youtube_player_flutter)
+- [hive](https://pub.dev/packages/hive)
+- [flare_flutter](https://pub.dev/packages/flare_flutter)
 
 ## Generate UML
 
