@@ -52,7 +52,7 @@ class _MovieTabWidgetState extends State<MovieTabWidget>
                 ],
               ),
               if (state is MovieTabChanged)
-                state.movies?.isEmpty ?? true
+                state.movies.isEmpty
                     ? Expanded(
                   child: Center(
                     child: Text(

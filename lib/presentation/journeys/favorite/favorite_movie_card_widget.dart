@@ -8,7 +8,6 @@ import 'package:movie_app/data/core/api_constants.dart';
 import 'package:movie_app/domain/entities/movie_entity.dart';
 import 'package:movie_app/presentation/blocs/favorite/favorite_cubit.dart';
 import 'package:movie_app/presentation/journeys/movie_detail/movie_detail_arguments.dart';
-import 'package:movie_app/presentation/journeys/movie_detail/movie_detail_screen.dart';
 
 class FavoriteMovieCardWidget extends StatelessWidget {
   final MovieEntity movie;

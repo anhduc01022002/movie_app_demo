@@ -23,6 +23,7 @@ class WatchVideoScreen extends StatefulWidget {
 class _WatchVideoScreenState extends State<WatchVideoScreen> {
   late List<VideoEntity> _videos;
   late YoutubePlayerController _controller;
+  double volume = 100;
 
   @override
   void initState() {
@@ -32,7 +33,7 @@ class _WatchVideoScreenState extends State<WatchVideoScreen> {
       initialVideoId: _videos[0].key,
       flags: const YoutubePlayerFlags(
         autoPlay: true,
-        mute: true,
+        mute: false,
       ),
     );
   }

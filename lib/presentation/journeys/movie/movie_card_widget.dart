@@ -5,7 +5,6 @@ import 'package:movie_app/common/constants/size_constants.dart' as Sizes;
 import 'package:movie_app/common/extensions/size_extensions.dart';
 import 'package:movie_app/data/core/api_constants.dart';
 import 'package:movie_app/presentation/journeys/movie_detail/movie_detail_arguments.dart';
-import 'package:movie_app/presentation/journeys/movie_detail/movie_detail_screen.dart';
 
 class MovieCardWidget extends StatelessWidget {
   final int movieId;
