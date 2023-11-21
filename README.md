@@ -32,7 +32,7 @@ A few resources to get you started if this is your first Flutter project:
 
 # 1. Clone the repo
 - $ git clone https://github.com/anhduc01022002/movie_app_demo.git
-- $ cd movie_app_
+- $ cd movie_app_demo
 
 # 2. Running
 - flutter 
